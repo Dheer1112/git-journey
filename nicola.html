@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikola Tesla – The Genius Who Electrified the World</title>
+    <style>
+        :root {
+            --primary: #0a0e17;
+            --secondary: #1a2332;
+            --accent: #00d4ff;
+            --accent2: #7b2cbf;
+            --text: #e8eef7;
+            --muted: #9aa8bc;
+            --card: #121a27;
+            --glow: rgba(0, 212, 255, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background sparks */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(ellipse at center, #1a2a4a 0%, var(--primary) 70%);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-portrait {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 40px var(--glow), 0 0 80px rgba(123, 44, 191, 0.3);
+            margin-bottom: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 23, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+            z-index: 100;
+            padding: 0.75rem 1rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            list-style: none;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            padding: 0.35rem 0.5rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #c4b5fd;
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1.1rem;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(0, 212, 255, 0.12);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 212, 255, 0.35);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: var(--card);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            background: #0d1320;
+        }
+
+        .gallery-item figcaption {
+            padding: 1rem 1.1rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(0, 212, 255, 0.3);
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.4rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .conspiracy-card {
+            background: linear-gradient(145deg, #1a1225 0%, #121a27 100%);
+            border: 1px solid rgba(123, 44, 191, 0.35);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conspiracy-card h3 {
+            color: #e9d5ff;
+            margin-top: 0;
+        }
+
+        .warning {
+            background: rgba(123, 44, 191, 0.15);
+            border-left: 4px solid var(--accent2);
+            padding: 1rem 1.25rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            color: #d8b4fe;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .fact {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .fact strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.35rem;
+        }
+
+        .fact span {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            color: var(--muted);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #c4b5fd;
+            text-align: center;
+            max-width: 700px;
+            margin: 2.5rem auto;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(167, 139, 250, 0.3);
+            border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-style: normal;
+        }
+
+        @media (max-width: 640px) {
+            .hero-portrait {
+                width: 160px;
+                height: 160px;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="hero-content">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/N.Tesla.JPG/800px-N.Tesla.JPG" 
+                 alt="Portrait of Nikola Tesla" 
+                 class="hero-portrait"
+                 onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/7/79/Tesla_circa_1890.jpg'">
+            <h1>Nikola Tesla</h1>
+            <p class="subtitle">1856 – 1943 · Inventor · Engineer · Visionary</p>
+            <p class="tagline">“If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.”</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#biography">Biography</a></li>
+            <li><a href="#inventions">Inventions</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#conspiracies">Conspiracies</a></li>
+            <li><a href="#legacy">Legacy</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- BIOGRAPHY -->
+        <section id="biography">
+            <h2>Life & Biography</h2>
+
+            <div class="facts-grid">
+                <div class="fact">
+                    <strong>July 10, 1856</strong>
+                    <span>Born in Smiljan<br>(modern Croatia)</span>
+                </div>
+                <div class="fact">
+                    <strong>~300</strong>
+                    <span>Patents worldwide</span>
+                </div>
+                <div class="fact">
+                    <strong>AC Power</strong>
+                    <span>Foundation of modern electricity</span>
+                </div>
+                <div class="fact">
+                    <strong>Jan 7, 1943</strong>
+                    <span>Died in New York City</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Early Life</h3>
+                <p>Nikola Tesla was born on a stormy night between July 9 and 10, 1856, in the village of Smiljan in the Austrian Empire (today part of Croatia). He was the fourth of five children of Serbian Orthodox priest Milutin Tesla and Đuka Mandić, an inventive mother who created household tools and had a remarkable memory for epic poetry.</p>
+                <p>As a child Tesla displayed extraordinary memory, visualization ability, and fascination with electricity and mechanical devices. The death of his older brother Dane in a riding accident deeply affected him. He later reported experiencing vivid visions — early signs of the intense mental life that would accompany him throughout his career.</p>
+            </div>
+
+            <div class="card">
+                <h3>Education & Breakthrough</h3>
+                <p>Tesla studied engineering at the Austrian Polytechnic in Graz and later attended the University of Prague. In 1882, while walking in a Budapest park and reciting Goethe’s <em>Faust</em>, he suddenly conceived the rotating magnetic field — the principle that would become the heart of the AC induction motor.</p>
+                <p>After working for the Continental Edison Company in Paris, Tesla sailed to the United States in 1884 with little money, a few poems, and ideas for a flying machine. He briefly worked for Thomas Edison in New York, improving Edison’s DC dynamos. The two soon parted ways over differences in vision and a disputed financial promise.</p>
+            </div>
+
+            <div class="card">
+                <h3>War of the Currents & Triumph</h3>
+                <p>In 1887–88 Tesla developed and patented his polyphase alternating-current system. George Westinghouse recognized its potential, licensed the patents, and hired Tesla as a consultant. Together they fought the “War of the Currents” against Edison’s direct-current system.</p>
+                <p>The decisive demonstration came at the 1893 World’s Columbian Exposition in Chicago, where Westinghouse and Tesla’s AC system brilliantly illuminated the fair. Shortly afterward, Tesla’s technology powered the first large-scale hydroelectric plant at Niagara Falls (1895–96), proving AC’s superiority for long-distance transmission.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1884</div>
+                    <p>Arrives in New York; begins work with Edison.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1888</div>
+                    <p>Sells AC patents to Westinghouse; War of Currents intensifies.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1891</div>
+                    <p>Invents the Tesla coil — still fundamental to radio and high-voltage work.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1899–1900</div>
+                    <p>Colorado Springs laboratory: high-voltage experiments, terrestrial stationary waves, wireless power research.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1901–1917</div>
+                    <p>Wardenclyffe Tower project on Long Island — ambitious attempt at global wireless communication and power. Abandoned due to funding collapse.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1930s–1943</div>
+                    <p>Lives in New York hotels, continues inventing, becomes increasingly reclusive. Dies of coronary thrombosis on January 7, 1943, at the New Yorker Hotel.</p>
+                </div>
+            </div>
+
+            <div class="quote">
+                “The present is theirs; the future, for which I really worked, is mine.”
+                <cite>— Nikola Tesla</cite>
+            </div>
+        </section>
+
+        <!-- INVENTIONS -->
+        <section id="inventions">
+            <h2>Major Inventions & Work</h2>
+
+            <div class="card">
+                <h3>Alternating Current (AC) System</h3>
+                <p>Tesla’s polyphase AC system — motors, generators, transformers, and transmission methods — became the global standard for electric power. Without it, the modern electrical grid as we know it would not exist.</p>
+            </div>
+
+            <div class="card">
+                <h3>Tesla Coil (1891)</h3>
+                <p>A resonant transformer circuit that produces high-voltage, high-frequency alternating current. Still used in radio technology, medical devices, and spectacular electrical demonstrations.</p>
+            </div>
+
+            <div class="card">
+                <h3>Induction Motor</h3>
+                <p>Based on the rotating magnetic field, this brushless AC motor is the workhorse of industry and household appliances worldwide.</p>
+            </div>
+
+            <div class="card">
+                <h3>Wireless Power & Radio Foundations</h3>
+                <p>Tesla demonstrated wireless lighting and radio-controlled boats decades ahead of their time. In 1943 the U.S. Supreme Court recognized key Tesla patents related to radio, posthumously affirming priority over Marconi in certain respects.</p>
+            </div>
+
+            <div class="card">
+                <h3>Colorado Springs & Wardenclyffe</h3>
+                <p>In Colorado Springs (1899–1900) Tesla built one of the largest Tesla coils ever, exploring terrestrial stationary waves and the idea of transmitting power through the Earth. The later Wardenclyffe Tower on Long Island was intended as a global wireless communication and power station. Funding dried up and the tower was demolished in 1917.</p>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery">
+            <h2>Photos of Tesla & His Work</h2>
+            <p style="color: var(--muted); margin-bottom: 1.5rem;">All images are public domain / Wikimedia Commons historical photographs.</p>
+
+            <div class="gallery">
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Tesla_circa_1890.jpg/800px-Tesla_circa_1890.jpg" 
+                         alt="Nikola Tesla portrait circa 1890"
+                         loading="lazy"
+                         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/d/d4/N.Tesla.JPG'">
+                    <figcaption>Nikola Tesla, portrait circa 1890 (Napoleon Sarony studio)</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/N.Tesla.JPG/800px-N.Tesla.JPG" 
+                         alt="Nikola Tesla"
+                         loading="lazy">
+                    <figcaption>Classic portrait of Nikola Tesla</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Nikola_Tesla%2C_with_his_equipment_Wellcome_M0014782.jpg/800px-Nikola_Tesla%2C_with_his_equipment_Wellcome_M0014782.jpg" 
+                         alt="Tesla in Colorado Springs laboratory with magnifying transmitter"
+                         loading="lazy">
+                    <figcaption>Famous double-exposure photo: Tesla seated beside his Colorado Springs “magnifying transmitter” (1899). The arcs were photographed separately.</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tesla_Colorado_Springs_laboratory_exterior.jpg/800px-Tesla_Colorado_Springs_laboratory_exterior.jpg" 
+                         alt="Colorado Springs laboratory exterior"
+                         loading="lazy">
+                    <figcaption>Exterior of Tesla’s Colorado Springs experimental station, 1899–1900</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Wardenclyffe_Tower_full_view.jpg/400px-Wardenclyffe_Tower_full_view.jpg" 
+                         alt="Wardenclyffe Tower"
+                         loading="lazy">
+                    <figcaption>Wardenclyffe Tower, Shoreham, Long Island (c. 1904) — Tesla’s unfinished global wireless station</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tesla_Broadcast_Tower_1904.jpeg/400px-Tesla_Broadcast_Tower_1904.jpeg" 
+                         alt="Wardenclyffe Tower another view"
+                         loading="lazy">
+                    <figcaption>Another contemporary view of the Wardenclyffe facility, 1904</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mark_Twain_in_the_lab_of_Nikola_Tesla%3B_1894.jpg/600px-Mark_Twain_in_the_lab_of_Nikola_Tesla%3B_1894.jpg" 
+                         alt="Mark Twain in Tesla's lab"
+                         loading="lazy">
+                    <figcaption>Mark Twain in Nikola Tesla’s New York laboratory, 1894</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Tesla%27s_induction_motor.jpg/800px-Tesla%27s_induction_motor.jpg" 
+                         alt="Tesla induction motor"
+                         loading="lazy">
+                    <figcaption>Tesla’s induction motor — foundation of modern AC motors</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- CONSPIRACIES -->
+        <section id="conspiracies">
+            <h2>Famous Conspiracies & Mysteries</h2>
+
+            <div class="warning">
+                <strong>Note:</strong> The following section presents popular conspiracy theories and legends that have grown around Tesla. They are widely discussed in popular culture. Historical records, declassified FBI files, and expert assessments often contradict or lack evidence for the more dramatic claims. Enjoy them as part of the Tesla mythos, but approach with critical thinking.
+            </div>
+
+            <div class="conspiracy-card">
+                <h3>1. The Seized Papers & Government Cover-Up</h3>
+                <p>Immediately after Tesla’s death on January 7, 1943, agents of the U.S. Office of Alien Property Custodian entered his room at the New Yorker Hotel and seized trunks of papers, notebooks, and belongings. This occurred during World War II, when the government feared any advanced technology (especially a rumored “death ray”) could fall into enemy hands.</p>
+                <p>The physicist John G. Trump (uncle of later President Donald Trump) examined the materials for the government and concluded they contained “nothing of value” — mostly speculative and philosophical ideas without workable new principles. Many documents were later returned to Tesla’s family or archived. Conspiracy theorists claim the most important files were suppressed, classified, or destroyed, and that advanced Tesla technology remains hidden by the U.S. government or military.</p>
+            </div>
+
+            <div class="conspiracy-card">
+                <h3>2. The “Death Ray” / Teleforce Particle Beam</h3>
+                <p>In the 1930s Tesla publicly announced a defensive weapon he called “teleforce” — popularly dubbed the “death ray” or “death beam.” He described a device that could project a concentrated stream of particles capable of destroying aircraft or armies at distances of hundreds of miles, powered by stationary plants and drawing energy in a novel way.</p>
+                <p>Tesla offered the invention to several governments. Only the Soviet Union showed limited interest and reportedly conducted a partial test. No working prototype was ever demonstrated publicly, and no detailed engineering plans have surfaced. Skeptics note that Tesla made these claims late in life while living in poverty and dealing with obsessive behaviors. Believers insist the technology was real, suppressed, or later influenced programs such as Reagan’s Strategic Defense Initiative (“Star Wars”).</p>
+            </div>
+
+            <div class="conspiracy-card">
+                <h3>3. Free Wireless Energy & Suppression by Powerful Interests</h3>
+                <p>Tesla’s ultimate dream was a global system of wireless power transmission — free or nearly free energy available to anyone with a receiver. The unfinished Wardenclyffe Tower was the centerpiece of this vision. When J.P. Morgan and other investors withdrew support (partly because a free-energy system offered little profit), the project collapsed.</p>
+                <p>Conspiracy narratives claim that industrialists, oil interests, or the financial elite deliberately blocked Tesla’s free-energy technology to protect existing power monopolies. While it is historically true that funding dried up and Tesla died nearly penniless, there is no solid evidence of a coordinated conspiracy to suppress a working free-energy device. The physics of efficient long-distance wireless power remains extremely challenging even today.</p>
+            </div>
+
+            <div class="conspiracy-card">
+                <h3>4. Suspicious Circumstances of Death</h3>
+                <p>Tesla died alone in his hotel room of coronary thrombosis at age 86. He had been in declining health. Some conspiracy theories suggest foul play — that he was murdered because of his knowledge of advanced weapons or free energy, or that the government staged the seizure of his papers to hide something explosive. Official records and contemporary accounts give no indication of homicide; the more mundane explanation of old age and heart disease is supported by evidence.</p>
+            </div>
+
+            <div class="conspiracy-card">
+                <h3>5. Other Popular Legends</h3>
+                <p>Additional myths include: Tesla inventing a working earthquake machine, communicating with extraterrestrials or pigeons that were “messengers,” predicting or causing the Tunguska event of 1908 with a death-ray test, and possessing knowledge far beyond what was recorded. Most of these have little or no contemporary documentary support and grew in the decades after his death as Tesla became a cultural icon of the misunderstood genius.</p>
+            </div>
+        </section>
+
+        <!-- LEGACY -->
+        <section id="legacy">
+            <h2>Legacy</h2>
+            <div class="card">
+                <p>Nikola Tesla’s practical achievements — especially the AC power system — transformed the modern world. The SI unit of magnetic flux density is named the <strong>tesla</strong> in his honor. The electric-car company Tesla, Inc. carries his name as a tribute. Museums, statues, and science centers (including the Tesla Science Center at Wardenclyffe) keep his memory alive.</p>
+                <p>He remains a symbol of visionary science: brilliant, eccentric, ahead of his time, and ultimately under-rewarded in life. The combination of real revolutionary inventions and unfulfilled grand dreams has made him a lasting figure in both history and popular imagination.</p>
+            </div>
+
+            <div class="quote">
+                “I do not think there is any thrill that can go through the human heart like that felt by the inventor as he sees some creation of the brain unfolding to success… Such emotions make a man forget food, sleep, friends, love, everything.”
+                <cite>— Nikola Tesla</cite>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>A tribute to Nikola Tesla · Built with historical sources & public-domain images from Wikimedia Commons</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Images and biographical facts drawn from publicly available historical records. Conspiracy section presents popular theories for cultural interest.</p>
+    </footer>
+</body>
+</html>
